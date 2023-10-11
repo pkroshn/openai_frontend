@@ -16,7 +16,7 @@ import axios from 'axios';
 import { useAuth } from '../AuthContext'; // Import your AuthContext
 import { useNavigate } from 'react-router-dom';
 
-axios.defaults.baseURL = 'http://localhost:3001';
+axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 
 function Copyright(props) {
   return (

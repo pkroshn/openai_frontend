@@ -13,17 +13,12 @@ function App() {
   return (
     <Router>
       <Routes>
-        {/* Redirect to dashboard if user is authenticated */}
-        <Route
-          path="/"
-          element={user ? <Navigate to="/dashboard" /> : <SignIn />}
-        />
-        {/* Show dashboard if user is authenticated, else show nothing */}
+        <Route path="/" element={user ? <Navigate to="/dashboard" /> : <SignIn />} />
         <Route
           path="/dashboard"
           element={user ? <Dashboard /> : <Navigate to="/" />}
         />
-    </Routes>
+      </Routes>
     </Router>
   );
 }

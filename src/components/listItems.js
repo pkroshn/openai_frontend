@@ -18,13 +18,13 @@ export const mainListItems = ({ handleMenuClick }) => (
       </ListItemIcon>
       <ListItemText primary="Chat" />
     </ListItemButton>
-    <ListItemButton onClick={() => handleMenuClick('history')}>
+    {/* <ListItemButton onClick={() => handleMenuClick('history')}>
       <ListItemIcon>
         <SpeakerNotesIcon />
       </ListItemIcon>
       <ListItemText primary="Chat History" />
-    </ListItemButton>
-    <ListItemButton>
+    </ListItemButton> */}
+    <ListItemButton onClick={() => handleMenuClick('fileupload')}>
         <ListItemIcon>
             <CloudUploadIcon/>            
         </ListItemIcon>

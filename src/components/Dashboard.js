@@ -22,6 +22,7 @@ import { useAuth } from '../AuthContext';
 import { useNavigate } from 'react-router-dom';
 import ChatInterface from './ChatInterface';
 import ChatHistoryPage from './ChatHistoryPage';
+import FileUpload from './FileUpload';
 
 function Copyright(props) {
   return (
@@ -81,14 +82,6 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     },
   }),
 );
-
-const previousChats = [
-    { text: 'Hello there!', isUser: false },
-    { text: 'Hi! How can I assist you?', isUser: true },
-    { text: 'I have a question about your services.', isUser: false },
-    { text: 'Sure, feel free to ask.', isUser: true },
-    // ... more chat history entries
-  ];
 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
@@ -192,6 +185,8 @@ export default function Dashboard() {
                             <ChatInterface />
                         ) : selectedMenu === 'history' ? (
                             <ChatHistoryPage />
+                        ) : selectedMenu === 'fileupload' ? (
+                          <FileUpload />
                         ) : null}
                     </Paper>
                 </Grid>

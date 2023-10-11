@@ -15,6 +15,11 @@ function Chat({ initialAssistantMessage, chatId }) {
   ]);
   const [inputMessage, setInputMessage] = useState('');
 
+  // Function to replace newline characters with <br /> elements
+  function formatAssistantMessage(message) {
+    return message.replace(/\n/g, '<br />');
+  }
+
   const handleSendMessage = async () => {
     if (inputMessage.trim() === '') {
       return;
@@ -25,7 +30,8 @@ function Chat({ initialAssistantMessage, chatId }) {
     setInputMessage('');
 
     try {
-      const apiUrl = `http://localhost:3001/api/chat/${chatId}`;
+      const apiUrl = `${process.env.REACT_APP_API_URL}/api/chat/${chatId}`;
+      console.log(apiUrl);
       const requestData = {
         role: 'user',
         content: inputMessage,
@@ -37,9 +43,10 @@ function Chat({ initialAssistantMessage, chatId }) {
         },
       });
 
-      const assistantMessage = response.data.response.message;
+      const assistantMessage = response.data.response.message.content;
+      const formattedAssistantMessage = formatAssistantMessage(assistantMessage);
       const newAssistantMessage = {
-        text: assistantMessage.content,
+        text: formattedAssistantMessage,
         isUser: false,
       };
       setMessages((prevMessages) => [...prevMessages, newAssistantMessage]);
@@ -52,7 +59,7 @@ function Chat({ initialAssistantMessage, chatId }) {
     <Box display="flex" flexDirection="column" height="100%">
       <Box
         flex={1}
-        overflow="auto"
+        // overflow="auto"
         display="flex"
         flexDirection="column"
         justifyContent="flex-end"
@@ -92,9 +99,9 @@ function Chat({ initialAssistantMessage, chatId }) {
                   marginLeft: '8px',
                   backgroundColor: message.isUser ? 'white' : 'lightgray',
                 }}
-              >
-                {message.text}
-              </Box>
+                // Render message text with HTML content
+                dangerouslySetInnerHTML={{ __html: message.text }}
+              ></Box>
             </Box>
           </Box>
         ))}
