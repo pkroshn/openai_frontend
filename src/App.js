@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import { AuthProvider } from './AuthContext';
 import './App.css';
 import SignIn from './components/Signin';
+import SignUp from './components/Signup';
 import Dashboard from './components/Dashboard';
 import { useAuth } from './AuthContext'; // Import useAuth hook
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
@@ -18,6 +19,7 @@ function App() {
           path="/dashboard"
           element={user ? <Dashboard /> : <Navigate to="/" />}
         />
+        <Route path="/signup" element={!user ? <SignUp /> : <Navigate to="/dashboard" />} />
       </Routes>
     </Router>
   );
